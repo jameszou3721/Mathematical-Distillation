@@ -8,3 +8,19 @@ In this work, I explore a Zero-Student-Prior Distillation approach that derives 
 Tested on compressing Qwen2.5-7B-Instruct into a depth-matched (d_S = 896) student under tight compute budgets, our teacher-synthesized student achieves faster convergence and preserves real semantic comprehension on unseen ARC-Easy science questions without using a single pre-trained small-model weight.
 📄 Read the full paper (DOI): https://doi.org/10.5281/zenodo.24512092
 #AIResearch #LargeLanguageModels #KnowledgeDistillation #ModelCompression #MachineLearning #DeepLearning #LLMs
+
+## Citation
+
+If you find this work helpful in your research, please cite our preprint:
+
+```bibtex
+@misc{zou2026zerostudentprior,
+  author       = {Zou, James},
+  title        = {A Novel Distillation Method: Synthesizing All Student Parameters Mathematically from the Teacher Model with Minimal Training},
+  year         = {2026},
+  month        = nov,
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.24512092},
+  url          = {https://doi.org}
+}
+```
