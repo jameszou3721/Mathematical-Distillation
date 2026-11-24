@@ -21,6 +21,6 @@ If you find this work helpful in your research, please cite our preprint:
   month        = nov,
   publisher    = {Zenodo},
   doi          = {10.5281/zenodo.24512092},
-  url          = {https://doi.org}
+  url          = {https://doi.org/10.5281/zenodo.24512092}
 }
 ```
