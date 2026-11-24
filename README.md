@@ -36,25 +36,6 @@ All projection bases are strictly column-orthonormal and achieve the theoretical
 
 ---
 
-## Citation
-
-If you find this work helpful in your research, please cite our preprint:
-
-> Zou, J. (2026). *A Novel Distillation Method: Synthesizing All Student Parameters Mathematically from the Teacher Model with Minimal Training* (1.0). Zenodo. https://doi.org
-
-```bibtex
-@misc{zou_2026_24512092,
-  author       = {Zou, James},
-  title        = {{A Novel Distillation Method: Synthesizing All Student Parameters Mathematically from the Teacher Model with Minimal Training}},
-  month        = nov,
-  year         = 2026,
-  publisher    = {Zenodo},
-  version      = {1.0},
-  doi          = {10.5281/zenodo.24512092},
-  url          = {https://doi.org}
-}
-```
-
 
 
 ## Citation
