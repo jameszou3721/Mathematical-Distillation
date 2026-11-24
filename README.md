@@ -15,7 +15,7 @@ If you find this work helpful in your research, please cite our preprint:
 
 ```bibtex
 @misc{zou2026zerostudentprior,
-  author       = {Zou, James},
+  author       = {Zou, Dingguo},
   title        = {A Novel Distillation Method: Synthesizing All Student Parameters Mathematically from the Teacher Model with Minimal Training},
   year         = {2026},
   month        = nov,
