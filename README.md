@@ -1,11 +1,11 @@
-# Zero-Student-Prior Distillation Method
+# Mathematical-Distillation
 
-[![DOI](https://zenodo.org)](https://doi.org)
+[![DOI](https://zenodo.org)](https://zenodo.org)
 [![License: CC BY 4.0](https://shields.io)](https://creativecommons.org)
 
-Official repository for **"A Novel Distillation Method: Synthesizing All Student Parameters Mathematically from the Teacher Model with Minimal Training"**.
+Official repository for **"A Novel Distillation Method: Synthesizing All Student Parameters Mathematically from the Teacher Model with Minimal Training"** (*Zero-Student-Prior Distillation*).
 
-📄 **Preprint Paper:** [https://doi.org](https://doi.org)
+📄 **Read Full Preprint Paper:** [https://zenodo.org](https://zenodo.org) (DOI: `10.5281/zenodo.24512092`)
 
 ---
 
@@ -15,13 +15,13 @@ Conventional knowledge distillation into compact, heterogeneous student language
 
 Our **Zero-Student-Prior Distillation Method** derives **100% of the student model's parameters mathematically from the teacher model in closed form**, followed by minimal training:
 
-1. **Frozen Symmetric SVD Vocabulary Boundaries:** Extracts a shared orthonormal semantic trunk $\mathbf{M} \in \mathbb{R}^{d_T \times d_S}$ from the zero-centered teacher embedding matrix to synthesize and permanently freeze both input embeddings $\mathbf{E}_S$ and the language modeling head $\mathbf{W}_{\text{lm},S}$ ($50.4\%$ of total student parameters frozen, zero vocabulary training).
-2. **Head-Coupled Spectral Projection for GQA:** Projects Grouped-Query Attention query, key, value, and output matrices via head-coupled SVD so per-head inner products $\mathbf{q}_h^T \mathbf{k}_h$ and residual stream directions stay aligned.
+1. **Frozen Symmetric SVD Vocabulary Boundaries:** Extracts a shared orthonormal semantic trunk $\mathbf{M} \in \mathbb{R}^{d_{T} \times d_{S}}$ from the zero-centered teacher embedding matrix to synthesize and permanently freeze both input embeddings $\mathbf{E}_{S}$ and the language modeling head $\mathbf{W}_{\text{lm},S}$ (50.4% of total student parameters frozen, zero vocabulary training).
+2. **Head-Coupled Spectral Projection for GQA:** Projects Grouped-Query Attention query, key, value, and output matrices via head-coupled SVD so per-head inner products $\mathbf{q}_{h}^{T}\mathbf{k}_{h}$ and residual stream directions stay aligned.
 3. **Orthonormal SwiGLU Neuron Basis via Thin QR Factorization:** Builds an orthonormal SwiGLU neuron basis $\mathbf{U}_{\text{mlp}}$ via thin QR factorization of the coupled MLP matrix $\mathbf{J}_{\text{mlp}}$ to preserve dominant energy across `gate`, `up`, and `down` projections.
-4. **Analytical RMSNorm Transfer:** Derives student normalization gains directly from the teacher's RMSNorm weights via squared-basis projection $\operatorname{diag}(\mathbf{M}^T \operatorname{diag}(\boldsymbol{\gamma}_T) \mathbf{M})$, with $\sqrt{d_T / d_S}$ scaling on the final readout norm.
+4. **Analytical RMSNorm Transfer:** Derives student normalization gains directly from the teacher's RMSNorm weights via squared-basis projection $\operatorname{diag}(\mathbf{M}^{T} \operatorname{diag}(\boldsymbol{\gamma}_{T}) \mathbf{M})$, with $\sqrt{d_{T} / d_{S}}$ scaling on the final readout norm.
 5. **Variance Normalization with Foldable Scalars:** Applies analytical variance normalization ($1/\sqrt{d_{\text{in}}}$) alongside lightweight layer-wise learnable scalars $\alpha_{l,m}$ that merge directly into linear weights at export with **zero inference overhead**.
 
-All projection bases are strictly column-orthonormal and achieve the theoretical optimal spectral condition number $\kappa_2 = 1.0000$.
+All projection bases are strictly column-orthonormal and achieve the theoretical optimal spectral condition number $\kappa_{2} = 1.0000$.
 
 ---
 
@@ -35,6 +35,26 @@ All projection bases are strictly column-orthonormal and achieve the theoretical
 | **Ours (Zero-Prior Student, Full)** | **28** | **896** | **4864** | **100% Frozen** | **0.4981** | **0 (Folded)** |
 
 ---
+
+## Citation
+
+If you find this work helpful in your research, please cite our preprint:
+
+> Zou, J. (2026). *A Novel Distillation Method: Synthesizing All Student Parameters Mathematically from the Teacher Model with Minimal Training* (1.0). Zenodo. https://doi.org
+
+```bibtex
+@misc{zou_2026_24512092,
+  author       = {Zou, James},
+  title        = {{A Novel Distillation Method: Synthesizing All Student Parameters Mathematically from the Teacher Model with Minimal Training}},
+  month        = nov,
+  year         = 2026,
+  publisher    = {Zenodo},
+  version      = {1.0},
+  doi          = {10.5281/zenodo.24512092},
+  url          = {https://doi.org}
+}
+```
+
 
 
 ## Citation
