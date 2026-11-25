@@ -112,7 +112,7 @@ python chat_demo.py
 | Qwen2.5-7B Teacher | 28 | 3584 | 18944 | — | — | — |
 | 24L Naive Truncation Baseline | 24 | 896 | 4864 | 100% Frozen | 0.5754 | 0 |
 | 28L + Analytical RMSNorm Transfer | 28 | 896 | 4864 | 100% Frozen | 0.5210 | 0 |
-| **Ours (Zero-Prior Student, Full)** | **28** | **896** | **4864** | **100% Frozen** | **0.4981** | **0 (Folded)** |
+| **Final** | **28** | **896** | **4864** | **100% Frozen** | **0.4981** | **0 (Folded)** |
 
 ---
 
