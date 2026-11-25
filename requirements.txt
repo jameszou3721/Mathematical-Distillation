@@ -1,0 +1,6 @@
+torch>=2.2.0
+transformers>=4.45.0
+datasets>=2.18.0
+accelerate>=0.30.0
+lm-eval>=0.4.3
+numpy>=1.26.0
