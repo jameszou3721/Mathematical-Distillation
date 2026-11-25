@@ -5,7 +5,7 @@
 
 Official repository for **"A Novel Distillation Method: Synthesizing All Student Parameters Mathematically from the Teacher Model with Minimal Training"** (*Zero-Student-Prior Distillation*).
 
-📄 **Read Full Preprint Paper:** [https://zenodo.org](https://zenodo.org) (DOI: `10.5281/zenodo.24512092`)
+📄 **Read Full Preprint Paper:** [https://zenodo.org](https://doi.org/10.5281/zenodo.24512092)
 
 ---
 
@@ -120,11 +120,11 @@ python chat_demo.py
 
 If you find this work helpful in your research, please cite our preprint:
 
-> Zou, J. (2026). *A Novel Distillation Method: Synthesizing All Student Parameters Mathematically from the Teacher Model with Minimal Training* (1.0). Zenodo. https://doi.org
+> Zou, D. (2026). *A Novel Distillation Method: Synthesizing All Student Parameters Mathematically from the Teacher Model with Minimal Training* (1.0). Zenodo. https://doi.org
 
 ```bibtex
 @misc{zou_2026_24512092,
-  author       = {Zou, James},
+  author       = {Zou, Dingguo},
   title        = {{A Novel Distillation Method: Synthesizing All Student Parameters Mathematically from the Teacher Model with Minimal Training}},
   month        = nov,
   year         = 2026,
