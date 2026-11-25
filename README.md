@@ -15,10 +15,10 @@ Conventional knowledge distillation into compact, heterogeneous student language
 
 Our **Zero-Student-Prior Distillation Method** derives **100% of the student model's parameters mathematically from the teacher model in closed form**, followed by minimal training:
 
-1. **Frozen Symmetric SVD Vocabulary Boundaries:** Extracts a shared orthonormal semantic trunk \(\mathbf{M} \in \mathbb{R}^{d_{T} \times d_{S}}\) from the zero-centered teacher embedding matrix to synthesize and permanently freeze both input embeddings \(\mathbf{E}_{S}\) and the language modeling head \(\mathbf{W}_{\text{lm},S}\) (50.4% of total student parameters frozen, zero vocabulary training).
-2. **Head-Coupled Spectral Projection for GQA:** Projects Grouped-Query Attention query, key, value, and output matrices via head-coupled SVD so per-head inner products \(\mathbf{q}_{h}^{T}\mathbf{k}_{h}\) and residual stream directions stay aligned.
-3. **Orthonormal SwiGLU Neuron Basis via Thin QR Factorization:** Builds an orthonormal SwiGLU neuron basis \(\mathbf{U}_{\text{mlp}}\) via thin QR factorization of the coupled MLP matrix \(\mathbf{J}_{\text{mlp}}\) to preserve dominant energy across `gate`, `up`, and `down` projections.
-4. **Analytical RMSNorm Transfer:** Derives student normalization gains directly from the teacher's RMSNorm weights via squared-basis projection \(\mathrm{diag}(\mathbf{M}^{T} \mathrm{diag}(\boldsymbol{\gamma}_{T}) \mathbf{M})\), with \(\sqrt{d_{T} / d_{S}}\) scaling on the final readout norm.
+1. **Frozen Symmetric SVD Vocabulary Boundaries:** Extracts a shared orthonormal semantic trunk \(\mathbf{M} \in \mathbb{R}^{d_T \times d_S}\) from the zero-centered teacher embedding matrix to synthesize and permanently freeze both input embeddings \(\mathbf{E}\_{S}\) and the language modeling head \(\mathbf{W}\_{\text{lm},S}\) (50.4% of total student parameters frozen, zero vocabulary training).
+2. **Head-Coupled Spectral Projection for GQA:** Projects Grouped-Query Attention query, key, value, and output matrices via head-coupled SVD so per-head inner products \(\mathbf{q}\_{h}^{T}\mathbf{k}\_{h}\) and residual stream directions stay aligned.
+3. **Orthonormal SwiGLU Neuron Basis via Thin QR Factorization:** Builds an orthonormal SwiGLU neuron basis \(\mathbf{U}\_{\text{mlp}}\) via thin QR factorization of the coupled MLP matrix \(\mathbf{J}\_{\text{mlp}}\) to preserve dominant energy across `gate`, `up`, and `down` projections.
+4. **Analytical RMSNorm Transfer:** Derives student normalization gains directly from the teacher's RMSNorm weights via squared-basis projection \(\mathrm{diag}(\mathbf{M}^{T} \mathrm{diag}(\boldsymbol{\gamma}\_{T}) \mathbf{M})\), with \(\sqrt{d\_{T} / d\_{S}}\) scaling on the final readout norm.
 5. **Variance Normalization with Foldable Scalars:** Applies analytical variance normalization (\(1 / \sqrt{d_{\text{in}}}\)) alongside lightweight layer-wise learnable scalars \(\alpha_{l,m}\) that merge directly into linear weights at export with **zero inference overhead**.
 
 All projection bases are strictly column-orthonormal and achieve the theoretical optimal spectral condition number \(\kappa_{2} = 1.0000\).
@@ -80,7 +80,7 @@ python synthesize_and_train.py \
 
 ### 3. Reproducible Dual-CPU Benchmark Evaluation (`lm-evaluation-harness`)
 
-Because the exported model is a standard Hugging Face `Qwen2ForCausalLM` checkpoint with **zero inference overhead**, anyone can reproduce full benchmark accuracies on a standard dual-socket CPU server in under 9 minutes without requiring a GPU:
+Because the exported model is a standard Hugging Face `Qwen2ForCausalLM` checkpoint with **zero inference overhead**, anyone can reproduce full benchmark accuracies on a standard dual-socket CPU server in under 10 minutes without requiring a GPU:
 
 ```bash
 PHYS_CORES=\$(lscpu | awk '/^Core\(s\) per socket:/ {c=\$4} /^Socket\(s\):/ {s=\$2} END {print c*s}')
@@ -107,20 +107,12 @@ python chat_demo.py
 
 ## Key Results (Qwen2.5-7B-Instruct $\to$ 0.54B Student)
 
-### Training Convergence Ablation
-
 | Model | Layers ($L$) | Width ($d$) | MLP ($m$) | Frozen Vocab | Final Loss $\downarrow$ | Inference Overhead |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | Qwen2.5-7B Teacher | 28 | 3584 | 18944 | — | — | — |
 | 24L Naive Truncation Baseline | 24 | 896 | 4864 | 100% Frozen | 0.5754 | 0 |
 | 28L + Analytical RMSNorm Transfer | 28 | 896 | 4864 | 100% Frozen | 0.5210 | 0 |
 | **Ours (Zero-Prior Student, Full)** | **28** | **896** | **4864** | **100% Frozen** | **0.4981** | **0 (Folded)** |
-
-### Zero-Shot Full Benchmark Evaluation (56-Core Dual-CPU Server, 0% Pre-trained Student Weights)
-
-| Model | ARC-Easy (2,376 Qs) `acc` | PIQA (1,838 Qs, Unseen) `acc` |
-| :--- | :---: | :---: |
-| **Ours (Zero-Prior Student)** | **28.49% ± 0.93%** | **53.21% ± 1.16%** |
 
 ---
 
@@ -142,4 +134,3 @@ If you find this work helpful in your research, please cite our preprint:
   url          = {https://doi.org}
 }
 ```
-
